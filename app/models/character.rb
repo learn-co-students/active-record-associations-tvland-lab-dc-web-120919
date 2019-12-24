@@ -18,6 +18,5 @@ class Character < ActiveRecord::Base
 
         #need to fix, networks -< shows -< characters
         network = Network.new(attributes)
-        network.shows.characters.push(self)
     end 
 end
