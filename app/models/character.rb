@@ -10,13 +10,19 @@ class Character < ActiveRecord::Base
 
     def build_show(attributes)
 
-        show = Show.new(attributes)
+        #returning the character. code executes, but Show.all does not 
+        #include the new show 
+        show = Show.create(attributes)
         show.characters.push(self)
+        return self 
     end 
 
     def build_network(attributes)
 
         #need to fix, networks -< shows -< characters
+        #fixed: needed build_show to return self to allow for chaining methods
         network = Network.new(attributes)
+        network.shows.push(self.show)
+        return self 
     end 
 end
